@@ -4,7 +4,6 @@ from bson.decimal128 import Decimal128
 from collections import defaultdict
 from datetime import date, datetime
 
-# Configuración de conexiones / Connection configuration
 SQL_CONN_STR = "DRIVER={ODBC Driver 18 for SQL Server};SERVER=localhost;DATABASE=TiendaRopa;Trusted_Connection=yes;TrustServerCertificate=yes;"
 MONGO_URI = "mongodb://localhost:27017/"
 
@@ -20,8 +19,6 @@ def convertir_fecha(val):
     if isinstance(val, date) and not isinstance(val, datetime):
         return datetime.combine(val, datetime.min.time())
     return val
-
-# --- FUNCIONES DE CARGA Y AGRUPACIÓN / LOADING AND GROUPING FUNCTIONS ---
 
 def cargar_marcas(cursor):
     cursor.execute("SELECT marca_id, nombre, pais_origen FROM marcas ORDER BY marca_id")
@@ -75,8 +72,6 @@ def cargar_pagos(cursor):
             "fecha": convertir_fecha(row[4])
         })
     return pagos_por_pedido
-
-# --- FUNCIONES DE MIGRACIÓN / MIGRATION FUNCTIONS ---
 
 def migrar_categorias(cursor, db_mongo):
     cursor.execute("SELECT categoria_id, nombre, categoria_padre_id FROM categorias ORDER BY categoria_id")

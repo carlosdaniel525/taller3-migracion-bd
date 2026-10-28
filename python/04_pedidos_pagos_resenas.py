@@ -3,11 +3,6 @@ import random
 from faker import Faker
 from datetime import datetime, date
 
-# DRIVER: Define el controlador que traduce las instrucciones de Python a SQL Server.
-# SERVER: Ubicación del motor de base de datos (database engine).
-# DATABASE: Nombre de la base de datos (database) objetivo.
-# Trusted_Connection: Usa las credenciales de Windows.
-# TrustServerCertificate: Permite conexiones sin validar certificados SSL.
 CONN_STR = "DRIVER={ODBC Driver 18 for SQL Server};SERVER=localhost;DATABASE=TiendaRopa;Trusted_Connection=yes;TrustServerCertificate=yes;"
 
 fake = Faker('es_MX')
@@ -75,7 +70,7 @@ def poblar_pedidos(cursor, clientes, direcciones, variantes):
             total_pedido += cantidad * precio_hist
             lineas_temp.append((v['variante_id'], v['producto_id'], cantidad, precio_hist))
             
-        # Modificación aplicada: OUTPUT INSERTED integrado para evitar el error NoneType
+
         cursor.execute("""
             INSERT INTO pedidos (cliente_id, direccion_id, fecha, estado, total)
             OUTPUT INSERTED.pedido_id
