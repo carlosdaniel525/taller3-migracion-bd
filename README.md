@@ -57,4 +57,3 @@ Estos puntos se detectaron en la revisión final. El código del repositorio es 
 - **E10 · Reseñas de compras canceladas.** `04_pedidos_pagos_resenas.py` agrega `compras_historicas` sin revisar el estado del pedido, así que algunas reseñas pueden venir de pedidos cancelados. Verificación: el bloque 8 de `sql/05_verificacion.sql` debe devolver filas. Corrección propuesta: agregar la compra solo si `estado != 'cancelado'`.
 - **E11 · Dinero con `float` en el generador.** Los precios se convierten a `float` en `04_pedidos_pagos_resenas.py`. Las sumas verificadas cuadran, pero lo correcto sería `Decimal`.
 - **E12 · Múltiples `$lookup`.** Ninguna consulta de `07_consultas.js` tiene dos `$lookup` encadenados, requisito de la consigna. Corrección propuesta: agregar una consulta de ventas por categoría (productos → categorías).
-- **E13 · Paso 2.** `python/02_catalogo.py` es un marcador: falta pegar el código original de ese paso.
